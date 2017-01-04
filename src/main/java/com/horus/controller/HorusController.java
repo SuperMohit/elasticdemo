@@ -21,6 +21,7 @@ public class HorusController {
 	
 	@GetMapping("/save")
 	public void saveTransactions() {
+		horusTransactionService.saveTransactions();
 	}
 	
 }

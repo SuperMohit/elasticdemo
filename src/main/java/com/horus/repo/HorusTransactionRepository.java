@@ -8,7 +8,7 @@ import com.horus.document.Transaction;
 public interface HorusTransactionRepository
 		extends ElasticsearchRepository<Transaction, Long> {
 	
-	//Stream<Transaction> findAllAndStream();
+	
 
 
 }

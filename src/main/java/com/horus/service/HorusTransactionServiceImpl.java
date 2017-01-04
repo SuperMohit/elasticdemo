@@ -1,7 +1,8 @@
 package com.horus.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,16 +14,22 @@ import com.horus.repo.HorusTransactionRepository;
 public class HorusTransactionServiceImpl implements HorusTransactionService {
 	@Autowired
 	HorusTransactionRepository horusRepository;
-	
+
 	@Override
 	public List<Transaction> getAllTransactions() {
-		return (List<Transaction>) horusRepository.findAll();
-				//horusRepository.findAllAndStream().collect(Collectors.toList());
+		List<Transaction> transactions = new ArrayList<>();
+		Iterable<Transaction> iTransactions = horusRepository.findAll();
+		
+		if (iTransactions != null)
+			for (Transaction transaction : horusRepository.findAll())
+				transactions.add(transaction);
+		
+		return transactions;
 	}
 
 	@Override
 	public void saveTransactions() {
-		cleanBeforeSaving();		
+		cleanBeforeSaving();
 		saveAll();
 	}
 
